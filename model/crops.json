@@ -1,0 +1,14 @@
+{
+  "crops": [
+    {
+      "id": 1,
+      "crop_type": "Ampalaya",
+      "price": 120
+    },
+    {
+      "id": 2,
+      "crop_type": "Talong",
+      "price": 120
+    }
+  ]
+}
