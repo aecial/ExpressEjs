@@ -26,20 +26,17 @@ app.get("/getCrops", async (req, res) => {
 app.post("/addCrop", async (req, res) => {
   const { name, price } = req.body;
   try {
-    const crops = await prisma.crops.count();
-    res.send(crops);
+    const newCrop = await prisma.crops.create({
+      data: {
+        name: name,
+        price: price,
+      },
+    });
+    res.status(201);
+    res.send({ message: `Added new crop ${name}` });
   } catch (error) {
     res.send(error);
   }
-
-  // const newCrop = await prisma.crops.create({
-  //   data: {
-  //     name: name,
-  //     price: price,
-  //   },
-  // });
-  // res.status(201);
-  res.send({ message: crops });
 });
 // app.post("/newCrops", async (req, res) => {
 //   const newCrop = await prisma.crops.create({
