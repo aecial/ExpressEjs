@@ -11,21 +11,7 @@ router.get("/getCrops", async (req, res) => {
   const crops = await prisma.crops.findMany();
   res.json(crops);
 });
-router.get("/:name", async (req, res) => {
-  const reqName = req.params.name;
-  const reqNameEdited = reqName.charAt(0).toUpperCase() + reqName.slice(1);
 
-  const findCrop = await prisma.crops.findUnique({
-    where: {
-      name: reqNameEdited,
-    },
-  });
-  if (findCrop === null) {
-    res.json({ message: "No Crop Found" });
-  } else {
-    res.json(findCrop);
-  }
-});
 router.post("/addCrop", async (req, res) => {
   const { name, price } = req.body;
   try {
@@ -39,6 +25,21 @@ router.post("/addCrop", async (req, res) => {
     res.send({ message: `Added new crop ${name}` });
   } catch (error) {
     res.send(error);
+  }
+});
+router.get("/:name", async (req, res) => {
+  const reqName = req.params.name;
+  const reqNameEdited = reqName.charAt(0).toUpperCase() + reqName.slice(1);
+
+  const findCrop = await prisma.crops.findUnique({
+    where: {
+      name: reqNameEdited,
+    },
+  });
+  if (findCrop === null) {
+    res.json({ message: "No Crop Found" });
+  } else {
+    res.json(findCrop);
   }
 });
 module.exports = router;
