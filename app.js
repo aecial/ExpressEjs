@@ -23,12 +23,13 @@ app.get("/users", async (req, res) => {
   res.render("users", { crops });
 });
 
+const cropRouter = require("./routes/crop");
+app.use("/crop", cropRouter);
+
 // 404 Page
 app.get("*", (req, res) => {
   res.render("404");
 });
-const cropRouter = require("./routes/crop");
-app.use("/crop", cropRouter);
 // app.post("/newCrops", async (req, res) => {
 //   const newCrop = await prisma.crops.create({
 //     data: {
