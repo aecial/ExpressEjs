@@ -1,8 +1,11 @@
 const prisma = require("../components/PrismaProvider");
+
+// Return All Crops
 const getAllCrops = async (req, res) => {
   const crops = await prisma.crops.findMany();
   res.json(crops);
 };
+// Add a Crop
 const addCrop = async (req, res) => {
   const { name, price } = req.body;
   try {
@@ -18,6 +21,7 @@ const addCrop = async (req, res) => {
     res.send(error);
   }
 };
+// Get Individual Crop
 const getCrop = async (req, res) => {
   const reqName = req.params.name;
   const reqNameEdited = reqName.charAt(0).toUpperCase() + reqName.slice(1);
@@ -32,6 +36,7 @@ const getCrop = async (req, res) => {
     res.json(findCrop);
   }
 };
+// Delete a Crop
 const deleteCrop = async (req, res) => {
   const { id } = req.body;
   const theCrop = await prisma.crops.findUnique({
@@ -50,6 +55,7 @@ const deleteCrop = async (req, res) => {
     res.send(error);
   }
 };
+// Update Crop Price
 const updateCrop = async (req, res) => {
   const { id, price } = req.body;
   const theCrop = await prisma.crops.findUnique({
@@ -73,10 +79,16 @@ const updateCrop = async (req, res) => {
     res.json(error);
   }
 };
+
+const returnViewCrops = async (req, res) => {
+  const crops = await prisma.crops.findMany();
+  res.render("getAllCrops", { crops });
+};
 module.exports = {
   getAllCrops,
   addCrop,
   getCrop,
   deleteCrop,
   updateCrop,
+  returnViewCrops,
 };
