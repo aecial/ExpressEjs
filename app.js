@@ -22,6 +22,9 @@ app.get("/users", async (req, res) => {
   const crops = await prisma.crops.findMany();
   res.render("users", { crops });
 });
+app.get("/addCrop", async (req, res) => {
+  res.render("newCrop");
+});
 
 const cropRouter = require("./routes/crop");
 app.use("/crop", cropRouter);

@@ -7,5 +7,32 @@
   </head>
   <body>
     <h1>New Crop</h1>
+    <form>
+      <input type="text" name="name" id="name" required />
+      <br />
+      <input type="number" name="price" id="price" required />
+      <hr />
+      <button type="submit" id="submit-btn">Submit</button>
+    </form>
   </body>
 </html>
+<script>
+  let btn = document.getElementById("submit-btn");
+
+  btn.addEventListener("click", function (e) {
+    e.preventDefault();
+    let cropName = document.getElementById("name").value;
+    let cropPrice = document.getElementById("price").value;
+    let information = { name: cropName, price: cropPrice };
+    console.log(information);
+    const res = fetch("/crop", {
+      Method: "POST",
+      Headers: {
+        Accept: "application.json",
+        "Content-Type": "application/json",
+      },
+      Body: information,
+      Cache: "default",
+    });
+  });
+</script>
