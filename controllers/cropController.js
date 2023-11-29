@@ -7,12 +7,13 @@ const getAllCrops = async (req, res) => {
 };
 // Add a Crop
 const addCrop = async (req, res) => {
-  const { name, price } = req.body;
   try {
+    const { name, price } = req.body;
+    const editedPrice = Number(price);
     const newCrop = await prisma.crops.create({
       data: {
         name: name,
-        price: price,
+        price: editedPrice,
       },
     });
     res.status(201);
