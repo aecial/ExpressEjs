@@ -7,12 +7,13 @@ const getAllCrops = async (req, res) => {
 };
 // Add a Crop
 const addCrop = async (req, res) => {
-  const { name, price } = req.body;
   try {
+    const { name, price } = req.body;
+    const editedPrice = Number(price);
     const newCrop = await prisma.crops.create({
       data: {
         name: name,
-        price: price,
+        price: editedPrice,
       },
     });
     res.status(201);
@@ -84,6 +85,10 @@ const returnViewCrops = async (req, res) => {
   const crops = await prisma.crops.findMany();
   res.render("getAllCrops", { crops });
 };
+const returnViewAddCrop = async (req, res) => {
+  const crops = await prisma.crops.findMany();
+  res.render("newCrop", { crops });
+};
 module.exports = {
   getAllCrops,
   addCrop,
@@ -91,4 +96,5 @@ module.exports = {
   deleteCrop,
   updateCrop,
   returnViewCrops,
+  returnViewAddCrop,
 };

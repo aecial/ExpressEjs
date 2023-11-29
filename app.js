@@ -11,6 +11,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 //routes
 app.get("/", (req, res) => {
   res.render("index", { availableCrops });
@@ -22,10 +23,6 @@ app.get("/users", async (req, res) => {
   const crops = await prisma.crops.findMany();
   res.render("users", { crops });
 });
-app.get("/addCrop", async (req, res) => {
-  res.render("newCrop");
-});
-
 const cropRouter = require("./routes/crop");
 app.use("/crop", cropRouter);
 

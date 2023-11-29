@@ -7,32 +7,36 @@
   </head>
   <body>
     <h1>New Crop</h1>
-    <form>
+    <form action="/crop" method="POST">
       <input type="text" name="name" id="name" required />
       <br />
       <input type="number" name="price" id="price" required />
       <hr />
       <button type="submit" id="submit-btn">Submit</button>
     </form>
+    <% crops.forEach((crop) => { %>
+    <p>ID: <%= crop.id %></p>
+    <p>Name: <%= crop.name %></p>
+    <p>Price: <%= crop.price %></p>
+    <hr />
+    <% }) %>
   </body>
 </html>
 <script>
-  let btn = document.getElementById("submit-btn");
+  // let btn = document.getElementById("submit-btn");
 
-  btn.addEventListener("click", function (e) {
-    e.preventDefault();
-    let cropName = document.getElementById("name").value;
-    let cropPrice = document.getElementById("price").value;
-    let information = { name: cropName, price: cropPrice };
-    console.log(information);
-    const res = fetch("/crop", {
-      Method: "POST",
-      Headers: {
-        Accept: "application.json",
-        "Content-Type": "application/json",
-      },
-      Body: information,
-      Cache: "default",
-    });
-  });
+  // btn.addEventListener("click", async function (e) {
+  //   e.preventDefault();
+  //   let cropName = document.getElementById("name").value;
+  //   let cropPrice = document.getElementById("price").value;
+  //   let information = { name: cropName, price: cropPrice };
+  //   console.log(information);
+  //   const res = await fetch("/crop", {
+  //     Method: "POST",
+  //     Headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     Body: information,
+  //   }).then((data) => console.log(data));
+  // });
 </script>

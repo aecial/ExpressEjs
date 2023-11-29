@@ -12,7 +12,7 @@ router
   .delete(cropController.deleteCrop);
 
 router.route("/viewCrops").get(cropController.returnViewCrops);
-
+router.route("/addCrop").get(cropController.returnViewAddCrop);
 router.route("/:name").get(cropController.getCrop);
 
 module.exports = router;
